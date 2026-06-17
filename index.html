@@ -18,6 +18,51 @@
 
     html {
       scroll-behavior: smooth;
+      color-scheme: dark light;
+    }
+
+    /* Dark mode overrides */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Background colors */
+        --cre8-color-bg-default: #0F172A;
+        --cre8-color-bg-subtle: #1E293B;
+        --cre8-color-bg-info: #1E3A5F;
+        
+        /* Content colors */
+        --cre8-color-content-default: #F1F5F9;
+        --cre8-color-content-subtle: #94A3B8;
+        --cre8-color-content-brand-strong: #60A5FA;
+        
+        /* Border colors */
+        --cre8-color-border-default: #334155;
+        --cre8-color-border-brand-subtle: #3B82F6;
+        
+        /* Keep brand colors but adjust for dark */
+        --cre8-color-bg-brand-strong: #3B82F6;
+        --cre8-color-bg-brand-xstrong: #2563EB;
+      }
+
+      body {
+        background: var(--cre8-color-bg-default);
+        color: var(--cre8-color-content-default);
+      }
+
+      /* Card specific dark mode */
+      cre8-card {
+        --card-bg: var(--cre8-color-bg-subtle);
+        --card-border-color: var(--cre8-color-border-default);
+      }
+
+      /* Override inline styles for cards that had explicit backgrounds */
+      [style*="background: var(--cre8-color-bg-subtle"],
+      [style*="background: var(--cre8-color-bg-info"] {
+        background: var(--cre8-color-bg-subtle) !important;
+      }
+
+      cre8-card[style*="background: var(--cre8-color-bg-info"] {
+        background: var(--cre8-color-bg-info, #1E3A5F) !important;
+      }
     }
 
     body {
@@ -25,6 +70,7 @@
       background: var(--cre8-color-bg-default, #ffffff);
       color: var(--cre8-color-content-default, #0F172A);
       line-height: var(--cre8-typography-body-default-line-height, 1.5);
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     /* Container */
@@ -42,6 +88,11 @@
     .section-header {
       margin-bottom: var(--cre8-spacing-48, 3rem);
       text-align: center;
+    }
+
+    /* Smooth transitions for dark mode */
+    cre8-card, cre8-badge {
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
   </style>
 </head>
